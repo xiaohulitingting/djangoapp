@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <p>这里是内容</p>
+    {% for i in list %}
+        <p>这是第{{ i }}个内容</p>
+    {% endfor %}
+
+    {% if 2 > 3 %}
+        <p>2>3</p>
+    {% endif %}
+    {% if 5 > 3 %}
+        <p>5>3</p>
+    {% endif %}
+</body>
+</html>

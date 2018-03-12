@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>临湘旅游官网后台管理系统 | 系统登陆</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author"/>
+    <link rel="stylesheet" href="../static/css/login.css" type="text/css">
+    <script src="../static/js/ZYCM.js"></script>
+    <script src="../static/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.idcode.js"></script>
+    <script src="../static/js/layui.all.js"></script>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.8);">
+
+<div id="w" class="login-window" title="用户登录">
+    <span class="login_title">临湘旅游官网后台管理系统</span>
+    <div class="easyui-layout" fit="true">
+        <div region="center" border="false"
+             style="padding: 10px; background: #fff; border: 1px solid #ccc; overflow-x: hidden; overflow-y: hidden;">
+            <form id="loginForm" method="post" name="loginForm" style="margin: 0px; padding: 0px;">
+                {% csrf_token %}
+                <table width="430" border="0" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <td align="right">
+                            用户名：
+                        </td>
+                        <td align="left">
+                            <input style=" font-size: 12px;" id="username"type="text" name="UserName" required=""/>
+                        </td>
+                    </tr>
+                    <tr height="30px">
+                        <td align="right">
+                            密 码：
+                        </td>
+                        <td align="left">
+                            <input style=" font-size: 12px;" id="password" type="password" name="Password" required=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            验证码：
+                        </td>
+                        <td align="left">
+                            <input style=" font-size: 12px;" id="code" type="text" name="code" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left">
+                            <span id="idcode" style="display: flex; font-size: 13px;"></span>
+                        </td>
+                    </tr>
+                    <tr height="50">
+                        <td></td>
+                        <td align="center" class="btnArr">
+                            <a id="btnLogin" class="btn_login"  onclick="login()">登 录</a>
+                            <a id="btnReset" class="btn_reset"  onclick="reset()">重 置</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var path = "http://localhost:2433";
+    //页面初始化
+    jQuery(document).ready(function() {
+       if (ZYCM.getParam("connectionStatus") === 0) {
+            layer.alert('网络未连接', { icon: 5 });
+        } else {
+            $('#username').focus();
+            $.idcode.setCode(); //加载验证码控件
+        }
+    });
+
+    //登陆方法
+    function login1() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        {#if (username == "") {#}
+        {#    layer.alert('用户名不能为空', { icon: 5 });#}
+        {#}#}
+        {#if (password == "") {#}
+        {#    layer.alert('密码不能为空', { icon: 5 });#}
+        {#}#}
+        if (!$.idcode.validateCode()) {
+            layer.alert('验证码输入有误！', { icon: 5 });
+            $("#code").val("");
+            $('#code').focus();
+            return;
+        }
+         $.ajaxSetup({
+                 data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+            });
+        //登陆验证
+        $.ajax({
+            url: "{% url 'loginSubmit' %}",
+            data: { 'username': username, 'password': password },
+            type: "POST",
+            success: function(data) {
+                if (data !== '') {
+                    var result = ZYCM.formatResultData(data);
+                    console.log(result.message)
+                    if (result.State === 0) {
+                        //document.location.href = path + '/Home/Index';
+                          layer.alert('登陆成功！', { icon: 6 });
+                    } else {
+                        layer.alert('登录失败', { icon: 5 });
+                        reset();
+                        return;
+                    }
+                } else {
+                    layer.alert('登陆失败：服务无法访问！', { icon: 5 });
+                    reset();
+                    return;
+                }
+            },
+            error: function(e) {
+                layer.alert('获取数据失败！', { icon: 5 });
+                return;
+            }
+        });
+    }
+function login() {
+
+
+        //登陆验证
+        $.ajax({
+            url: "{% url 'loginSubmit' %}",
+            data: {"telephone":"18801624780", "password":"123456787888", "phoneID":"111111111111", "version":"2.0.1", "clienttype":"1"},
+            type: "POST",
+            success: function(data) {
+
+                if (data !== '') {
+                    var result = ZYCM.formatResultData(data);
+                    console.log(result)
+                    if (result.State === 0) {
+                        //document.location.href = path + '/Home/Index';
+                          layer.alert('登陆成功！', { icon: 6 });
+                    } else {
+                        layer.alert('登录失败', { icon: 5 });
+                        reset();
+                        return;
+                    }
+                } else {
+                    layer.alert('登陆失败：服务无法访问！', { icon: 5 });
+                    reset();
+                    return;
+                }
+            },
+            error: function(e) {
+                layer.alert('获取数据失败！', { icon: 5 });
+                return;
+            }
+        });
+    }
+    //重置
+    function reset() {
+        $("#username").val('');
+        $("#password").val('');
+        $("#code").val('');
+        $.idcode.setCode();
+        $('#username').focus();
+    }
+
+    //登陆按钮回车事件（回车登录）
+    document.onkeydown = function(e) {
+        var theEvent = window.event || e;
+        var code = theEvent.keyCode || theEvent.which;
+        //只有焦点在输入框里面时，才能按回车登录
+        if (code === 13) {
+            //&& (document.activeElement.id === "username" || document.activeElement.id === "password" || document.activeElement.id === "code"
+            $("#btnLogin").click();
+        }
+    }
+
+</script>
+</body>

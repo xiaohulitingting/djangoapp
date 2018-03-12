@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="_csrf" th:attr="content=${_csrf.token}"/>
+  <title>上传头像</title>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <div >
+    <form action=""enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+    <h3>用户注册</h3>
+    <p>用户名：<input type="text" name="userName"></p>
+    <p>密码：<input type="password" name="password"></p>
+    <p>邮箱：<input type="text" name="email"></p>
+      <input id="avatar" type="text" value="" name="avatar" > {# 实际应用中要将该input标签隐藏，display:none; #}
+      <p><input type="submit" value="注册"></p>
+      </form>
+    <div >
+    <input id="avatarSlect" type="file" >
+    <img id="avatarPreview" src="" title="点击更换图片" >
+      </div>
+  </div>
+</body>
+
+<script>
+  $(function () {
+      bindAvatar1();
+ });
+  function bindAvatar() {
+      if(window.URL.createObjectURL){
+        bindAvatar3();
+      }else if(window.FileReader){
+        bindAvatar2();
+      }else {
+        bindAvatar1();
+      }
+ }
+
+  /*Ajax上传至后台并返回图片的url*/
+  function bindAvatar1() {
+      $("#avatarSlect").change(function () {
+          var csrf = $("input[name='csrfmiddlewaretoken']").val();
+          var formData=new FormData();
+          formData.append("csrfmiddlewaretoken",csrf);
+          formData.append('avatar', $("#avatarSlect")[0].files[0]);  /*获取上传的图片对象*/
+          console.log(formData.avatar)
+          $.ajax({
+              url: "{% url 'upload' %}",
+              type: 'POST',
+              data: formData,
+              processData:false,  // 告诉jquery不转换数据
+              contentType:false,  // 告诉jquery不设置内容格式
+              success: function (args) {
+                  console.log(1)
+                  console.log(args);  /*服务器端的图片地址*/
+                  $("#avatarPreview").attr('src','/'+args);  /*预览图片*/
+                  $("#avatar").val(args);  /*将服务端的图片url赋值给form表单的隐藏input标签*/
+              }
+          });
+      });
+  }
+  /*window.FileReader本地预览*/
+  function bindAvatar2() {
+    console.log(2);
+       $("#avatarSlect").change(function () {
+           var obj=$("#avatarSlect")[0].files[0];
+           var fr=new FileReader();
+           fr.onload=function () {
+               $("#avatarPreview").attr('src',this.result);
+               console.log(this.result);
+               $("#avatar").val(this.result);
+      };
+      fr.readAsDataURL(obj);
+    })
+ }
+ /*window.URL.createObjectURL本地预览*/
+ function bindAvatar3() {
+   console.log(3);
+      $("#avatarSlect").change(function () {
+          var obj=$("#avatarSlect")[0].files[0];
+          var wuc=window.URL.createObjectURL(obj);
+           $("#avatarPreview").attr('src',wuc);
+           $("#avatar").val(wuc);
+{#           $("#avatarUrl").load(function () {#}    /*当图片加载后释放内存空间，但在jQuery3.2.1中会报错。浏览器关闭后也会自动释放*/
+{#               window.URL.revokeObjectURL(wuc);#}
+{#      })#}
+   })
+ }
+
+</script>
+</html>
