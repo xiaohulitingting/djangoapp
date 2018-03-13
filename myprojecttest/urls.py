@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
-from apptest import views,Login,user,upload
+from apptest import views,Login,user,upload,product
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -33,6 +33,10 @@ urlpatterns = [
     url(r'^test/', upload.test), # 测试页面
     url(r'^getuserinfo$', user.getuserinfo), # 用户信息
     url(r'^getmessage$', user.getmessagecode), # 获取短信验证码
+    url(r'^checkmessage$', user.checkmessagecode), # 校验短信验证码
+    url(r'^getmemcache$', user.getmemcache),
+    url(r'^getfirstpage', product.getfirstpage),
+    url(r'^searchproduct', product.searchproduct),
 
 ]
 if settings.DEBUG:

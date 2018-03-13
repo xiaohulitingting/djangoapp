@@ -9,6 +9,7 @@ from django.core import serializers
 from apptest import log
 from apptest import request as requestclass
 from apptest.common import md5
+from apptest import mymemcache
 '''
 从post中取得数据，如果不存在则默认值为1 
 pageNumber = request.POST.get('pageNumber',1) 
@@ -28,6 +29,7 @@ models.UserInfo.objects.create(**dic)
 https://www.cnblogs.com/luolizhi/p/5610123.html
 '''
 c1=log.LOG('user')
+memcache = mymemcache.MemcachedClient()
 #注册
 @csrf_exempt
 def register(request):
@@ -147,6 +149,9 @@ def getuserinfo(request):
         c1.error()
         response_data["message"]="内部服务器错误"
     return HttpResponse(json.dumps(response_data,ensure_ascii=False))
+#发送验证码
+#创建者：hlt
+#创建时间：2018-03-13
 @csrf_exempt
 def getmessagecode(request):
     response_data = {}
@@ -162,21 +167,66 @@ def getmessagecode(request):
             values={"u":use,"p":pwd,"m":tele,"c":content}
             result= requestclass.get("http://api.smsbao.com/sms",values)
             if result=='0':
-
+                val=memcache.get(tele)
+                if val!=None:
+                    memcache.delete(tele)
+                memcache.set_timeout(tele,num,60)#60秒失效
                 response_data["message"] = "获取成功"
                 response_data["state"] = 1
                 response_data["data"] = num
-                '''
-                var
-                getnum = SessionUtility.GetSession(number); // 获取验证码
-                if (getnum != null)
-                    {
-                        SessionUtility.Clear(number); // 清除session
-                    }
-                    var
-                    sessionTimeOut = ConfigurationManager.AppSettings["SessionTimeOut"];
-                    SessionUtility.SetSession(number, num.ToString(), Int32.Parse(sessionTimeOut)); 
-              '''
+        else:
+            response_data["message"] = "请求方式错误"
+    except:
+        c1.error()
+        response_data["message"] = "内部服务器错误"
+    return HttpResponse(json.dumps(response_data, ensure_ascii=False))
+#校验验证码
+#创建者：hlt
+#创建时间：2018-03-13
+@csrf_exempt
+def checkmessagecode(request):
+    response_data = {}
+    response_data["state"] = 0
+    try:
+        if request.method == "POST":
+            tele = request.POST.get("telephone")
+            num = request.POST.get("number")
+            if tele!=None and tele!="":
+                val = memcache.get(tele)
+                result = ""
+                if val != None:
+                    result = str(val, "utf-8")
+                    if result == num:
+                        response_data["message"] = "校验成功"
+                        response_data["state"] = 1
+                else:
+                    response_data["message"] = "验证码失效"
+            else:
+                response_data["message"] = "手机号不能为空"
+
+        else:
+            response_data["message"] = "请求方式错误"
+    except:
+        c1.error()
+        response_data["message"] = "内部服务器错误"
+    return HttpResponse(json.dumps(response_data, ensure_ascii=False))
+#测试memcache缓存
+#创建者：hlt
+#创建时间：2018-03-13
+@csrf_exempt
+def getmemcache(request):
+    response_data = {}
+    response_data["state"] = 0
+    try:
+        if request.method == "POST":
+            #memcache.set_timeout("name", "xiaohuli",60)
+            val= memcache.get("name")
+            result=""
+            if val!=None:
+                result = str(val, "utf-8")
+            response_data["message"] = "data is xiaohuli"
+            response_data["state"] = 1
+            response_data["data"] = result
         else:
             response_data["message"] = "请求方式错误"
     except:

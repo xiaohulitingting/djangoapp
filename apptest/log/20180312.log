@@ -1,0 +1,444 @@
+=========================
+time:2018-03-12 13:51:39,755 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+TypeError: getsockaddrarg: AF_INET address must be tuple, not list
+
+=========================
+time:2018-03-12 13:52:41,535 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+TypeError: getsockaddrarg: AF_INET address must be tuple, not list
+
+=========================
+time:2018-03-12 13:54:05,093 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+TypeError: getsockaddrarg: AF_INET address must be tuple, not str
+
+=========================
+time:2018-03-12 13:54:14,261 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+TypeError: getsockaddrarg: AF_INET address must be tuple, not str
+
+=========================
+time:2018-03-12 13:58:22,766 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1103, in _readline
+    buf = _recv(sock, RECV_SIZE)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1157, in _recv
+    return sock.recv(size)
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+
+=========================
+time:2018-03-12 14:00:03,838 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 762, in _fetch_cmd
+    raise MemcacheUnknownError(line[:32])
+pymemcache.exceptions.MemcacheUnknownError: b'HTTP/1.1 400 Bad Request'
+
+=========================
+time:2018-03-12 14:01:34,002 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+=========================
+time:2018-03-12 14:02:02,070 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+=========================
+time:2018-03-12 14:02:05,838 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+=========================
+time:2018-03-12 14:02:24,765 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 195, in getmemcache
+    memcache.set("name", "xiaohuli")
+  File "F:/git/myprojecttest\apptest\mymemcache.py", line 11, in set
+    result = self.__mc.set(key, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 297, in set
+    return self._store_cmd(b'set', key, expire, noreply, value)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 772, in _store_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+=========================
+time:2018-03-12 14:11:48,980 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:49,859 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:50,212 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:50,429 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:50,633 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:50,828 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:11:51,033 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:22:44,596 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 15, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 723, in _fetch_cmd
+    self._connect()
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 258, in _connect
+    sock.connect(self.server)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+=========================
+time:2018-03-12 14:25:52,402 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 16, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:25:54,297 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 16, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 14:26:13,518 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = memcache.get("name")
+  File "F:\git\myprojecttest\apptest\mymemcache.py", line 16, in get
+    name = self.__mc.get(key)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 436, in get
+    return self._fetch_cmd(b'get', [key], False).get(key, default)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 730, in _fetch_cmd
+    buf, line = _readline(self.sock, buf)
+  File "F:\git\myprojecttest\venv\lib\site-packages\pymemcache\client\base.py", line 1105, in _readline
+    raise MemcacheUnexpectedCloseError()
+pymemcache.exceptions.MemcacheUnexpectedCloseError
+
+=========================
+time:2018-03-12 15:21:14,335 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = str(memcache.get("name"),'utf-8')
+TypeError: decoding to str: need a bytes-like object, NoneType found
+
+=========================
+time:2018-03-12 15:21:48,862 
+logger:user 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\user.py", line 196, in getmemcache
+    result = str(memcache.get("name"),'utf-8')
+TypeError: decoding to str: need a bytes-like object, NoneType found
+

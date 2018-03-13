@@ -1,0 +1,254 @@
+=========================
+time:2018-03-13 14:53:35,623 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 24, in getfirstpage
+    if type.endtime>=datetime:
+TypeError: '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+=========================
+time:2018-03-13 15:08:18,420 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 32, in getfirstpage
+    list=models.TFirstpageProduct.objects.filter(**query1)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 836, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 854, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1253, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1277, in _add_q
+    split_subq=split_subq,
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1153, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1015, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1379, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'FK_Type' into field. Choices are: createtime, descs, fk_product, fk_type, head, id, img, product_saleprice, sort, state, url
+
+=========================
+time:2018-03-13 15:10:34,061 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 32, in getfirstpage
+    list=models.TFirstpageProduct.objects.filter(**query1)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 836, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 854, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1253, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1277, in _add_q
+    split_subq=split_subq,
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1153, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1015, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1379, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'FK_Type' into field. Choices are: createtime, descs, fk_product, fk_type, head, id, img, product_saleprice, sort, state, url
+
+=========================
+time:2018-03-13 15:12:38,590 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:/git/myprojecttest\apptest\product.py", line 71, in getfirstproduct
+    dict=models.FirstpageProductManager.with_counts(item.fk_product)
+TypeError: with_counts() missing 1 required positional argument: 'productid'
+
+=========================
+time:2018-03-13 15:14:19,279 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 72, in getfirstproduct
+    dict=models.FirstpageProductManager.with_counts(productid)
+TypeError: with_counts() missing 1 required positional argument: 'productid'
+
+=========================
+time:2018-03-13 15:17:46,395 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:/git/myprojecttest\apptest\product.py", line 73, in getfirstproduct
+    dict=firstpageProductManager.with_counts()
+  File "F:/git/myprojecttest\apptest\models.py", line 270, in with_counts
+    var1 = '%' + self.productid + '%'
+TypeError: must be str, not int
+
+=========================
+time:2018-03-13 15:19:23,293 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 73, in getfirstproduct
+    dict=firstpageProductManager.with_counts()
+  File "F:\git\myprojecttest\apptest\models.py", line 270, in with_counts
+    var1 = '%' + self.productid + '%'
+TypeError: must be str, not int
+
+=========================
+time:2018-03-13 15:19:24,007 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 73, in getfirstproduct
+    dict=firstpageProductManager.with_counts()
+  File "F:\git\myprojecttest\apptest\models.py", line 270, in with_counts
+    var1 = '%' + self.productid + '%'
+TypeError: must be str, not int
+
+=========================
+time:2018-03-13 15:20:11,142 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 74, in getfirstproduct
+    firstpageproductodel["producttypeid"]=dict.id
+AttributeError: 'dict' object has no attribute 'id'
+
+=========================
+time:2018-03-13 15:21:45,816 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 75, in getfirstproduct
+    firstpageproductodel["producttypeid"]=dict.id
+AttributeError: 'dict' object has no attribute 'id'
+
+=========================
+time:2018-03-13 15:21:46,509 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 75, in getfirstproduct
+    firstpageproductodel["producttypeid"]=dict.id
+AttributeError: 'dict' object has no attribute 'id'
+
+=========================
+time:2018-03-13 15:22:49,925 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 75, in getfirstproduct
+    firstpageproductodel["producttypeid"]=dict["id"]
+KeyError: 'id'
+
+=========================
+time:2018-03-13 15:23:07,941 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 33, in getfirstpage
+    typemodel["data"]=getfirstproduct(list,type.num,type.typecode)
+  File "F:\git\myprojecttest\apptest\product.py", line 75, in getfirstproduct
+    firstpageproductodel["producttypeid"]=dict["id"]
+KeyError: 'id'
+
+=========================
+time:2018-03-13 16:31:18,324 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 106, in searchproduct
+    list= models.TProduct.objects.filter(status='3',productname_icontains=tag)[page:int(pagesize)]
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 836, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\query.py", line 854, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1253, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1277, in _add_q
+    split_subq=split_subq,
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1153, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1015, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\db\models\sql\query.py", line 1379, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'productname_icontains' into field. Choices are: auditingdesc, auditingtime, auditinguserid, browsenumber, buyprice, collectionnumber, currentsaleprice, entertime, enteruserid, fk_commissiontypeid, fk_producttypebrandid, fk_supplierid, formatdetails, graphicdetails, graphicdetailspath, id, outawaytime, productcode, productdesc, productname, putawaytime, remark, salenumber, saleprice, service, status, stockguardnumber, stocknumber, tagids, updatetime, updateuserid
+
+=========================
+time:2018-03-13 16:33:56,972 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 122, in searchproduct
+    response_data["data"] = productmodel
+UnboundLocalError: local variable 'productmodel' referenced before assignment
+

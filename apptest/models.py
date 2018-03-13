@@ -226,6 +226,22 @@ class TFeedback(models.Model):
         managed = False
         db_table = 't_feedback'
 
+class TFirstpageProducttype(models.Model):
+   # id = models.IntegerField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
+    typecode = models.IntegerField(db_column='TypeCode', blank=True, null=True)  # Field name made lowercase.
+    typename = models.CharField(db_column='TypeName', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    endtime = models.DateTimeField(db_column='EndTime')  # Field name made lowercase.
+    createtime = models.DateTimeField(db_column='CreateTime')  # Field name made lowercase.
+    state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
+    num = models.IntegerField(db_column='Num', blank=True, null=True)  # Field name made lowercase.
+    version = models.CharField(db_column='Version', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    sort = models.IntegerField(db_column='Sort', blank=True, null=True)  # Field name made lowercase.
+    # 与Publish建立一对多的关系,外键字段建立在多的一方
+
+    class Meta:
+        #managed = False
+        ordering = ['sort']
+        db_table = 't_firstpage_producttype'
 
 class TFirstpageProduct(models.Model):
    # id = models.IntegerField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
@@ -239,26 +255,25 @@ class TFirstpageProduct(models.Model):
     url = models.CharField(db_column='Url', max_length=100, blank=True, null=True)  # Field name made lowercase.
     sort = models.IntegerField(db_column='Sort', blank=True, null=True)  # Field name made lowercase.
     product_saleprice = models.FloatField(db_column='Product_SalePrice', blank=True, null=True)  # Field name made lowercase.
-
+    #fk_product = models.ForeignKey("TFirstpageProducttype",on_delete=models.BooleanField)
     class Meta:
-        managed = False
+        #managed = False
+        ordering = ['sort']
         db_table = 't_firstpage_product'
 
-
-class TFirstpageProducttype(models.Model):
-    #id = models.IntegerField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
-    typecode = models.IntegerField(db_column='TypeCode', blank=True, null=True)  # Field name made lowercase.
-    typename = models.CharField(db_column='TypeName', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    endtime = models.DateTimeField(db_column='EndTime')  # Field name made lowercase.
-    createtime = models.DateTimeField(db_column='CreateTime')  # Field name made lowercase.
-    state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
-    num = models.IntegerField(db_column='Num', blank=True, null=True)  # Field name made lowercase.
-    version = models.CharField(db_column='Version', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    sort = models.IntegerField(db_column='Sort', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 't_firstpage_producttype'
+class FirstpageProductManager(models.Manager):
+    def __init__(self,productid):
+        self.productid=productid
+    def with_counts(self):
+        from django.db import connection
+        cursor = connection.cursor()
+        var1 = self.productid
+        cursor.execute("""select a.ID,a.Name from yanwoo.t_product_type as a,yanwoo.t_product_typebrand as b,yanwoo.t_product as c where c.ID= %s and b.FK_ProductBrandID=c.FK_ProductTypeBrandID and b.FK_ProductTypeID=a.ID""",[var1])
+        tuple=cursor.fetchall()
+        result_dict = {}
+        for row in tuple:
+            result_dict={"id":row[0],"name":row[1]}
+        return result_dict
 
 
 class TGifts(models.Model):
