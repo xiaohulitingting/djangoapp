@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^getmemcache$', user.getmemcache),
     url(r'^getfirstpage', product.getfirstpage),
     url(r'^searchproduct', product.searchproduct),
+    url(r'^productdetail', product.productdetail),
 
 ]
 if settings.DEBUG:

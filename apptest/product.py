@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from myprojecttest import settings
+from django.db import transaction
 #获取首页商品
 #创建者：hlt
 #创建时间：2018-03-13
@@ -142,7 +143,6 @@ def productdetail(request):
        if request.method=="POST":
            pid=int(request.POST.get("productid","0"))#商品id
            userid=int(request.POST.get("userid","0"))#用户id
-           nlist=getproductdiscount(pid,userid)
            productlist= models.TProduct.objects.filter(id=pid)
            if productlist.count()>0:
                model=productlist[0]
@@ -170,9 +170,12 @@ def productdetail(request):
                resproductmodel["img"] =getproductimg(model.id)#获取商品图片
                resproductmodel["attributegroup"] =getattribute(model.id)#获取属性集合
                resproductmodel["discountinfo"] = getproductdiscount(model.id,userid)  #获取属性集合
+               flag= addbrowse(userid,model.id,model.fk_supplierid)
                response_data["message"] = "请求成功"
-               response_data["state"] =1
-               response_data["data"] = resproductmodel
+               response_data["state"] = 1
+               if flag:
+                   response_data["data"] = resproductmodel
+
            else:
                response_data["message"] = "商品不存在"
        else:
@@ -264,13 +267,13 @@ def getproductdiscount(productid,userid):
     for row in list:
         if row.isallproduct=="0":
             discountlist.append(getdiscountinfo(row,userid))
-        elif row.fk_promotionsmoduleid>0:
+        elif row.fk_promotionsmoduleid is not None and int(row.fk_promotionsmoduleid)>0:
             prolist=models.TPromotionsModule.objects.filter(fk_promotionsid=row.fk_promotionsmoduleid)
             if prolist.count()>0:
                pronewlist= models.TPromotionsNews.objects.filter(fk_pmoduleid=prolist[0].fk_moduleid,promotionsproductid=productid)
                if pronewlist.count()>0:
                     discountlist.append(getdiscountinfo(row, userid))
-        elif row.fk_promotionsid>0:
+        elif row.fk_promotionsid is not None and int(row.fk_promotionsid)>0:
             promolist=models.TPromotions.objects.filter(id=row.fk_promotionsid)
             for prorow in promolist:
                 prolist=models.TPromotionsModule.objects.filter(fk_promotionsid=prorow.id)
@@ -280,6 +283,7 @@ def getproductdiscount(productid,userid):
                         discountlist.append(getdiscountinfo(row, userid))
 
     return discountlist
+#获取优惠券
 def getdiscountinfo(row,userid):
     discontmodel = {}
     if row.getmode == 0:  # 只能领一次
@@ -298,3 +302,39 @@ def getdiscountinfo(row,userid):
     discontmodel["starttime"] = str(row.discountstartdatetime)[0, 10]
     discontmodel["summoney"] = row.discountsumprice
     return discontmodel
+#添加浏览足迹
+def addbrowse(userid,productid,supplierid):
+    try:
+        if userid > 0:
+            blist = models.TMemberBrowse.objects.filter(fk_productid=productid, fk_memberid=userid)
+            with transaction.atomic():
+                if blist.count() == 0:
+                    models.TMemberBrowse.objects.create(browernumber=1, fk_memberid=userid, fk_productid=productid,
+                                                        fk_supplierid=supplierid,
+                                                        lastbrowsedatetime=datetime.datetime.now(), remark="")
+                    updateproduct(1, productid)
+                    return True
+                else:
+                    bmodel = blist[0]
+                    bmodel.lastbrowsedatetime = datetime.datetime.now()
+                    bmodel.browernumber = bmodel.browernumber + 1
+                    bmodel.save()
+                    updateproduct(1, productid)
+                    return True
+        else:
+            updateproduct(1, productid)
+            return True
+    except:
+        return False
+def updateproduct(type,productid):
+    productlist=models.TProduct.objects.filter(id=productid)
+    if productlist.count()>0:
+        productmodel=productlist[0]
+        if type==1:#浏览
+            productmodel.browsenumber=productmodel.browsenumber+1
+        else:#收藏
+            productmodel.collectionnumber=productmodel.collectionnumber+1
+        productmodel.save()
+        return True
+    else:
+        return False
