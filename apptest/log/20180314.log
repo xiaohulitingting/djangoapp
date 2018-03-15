@@ -1,0 +1,256 @@
+=========================
+time:2018-03-14 13:36:24,588 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 159, in productdetail
+    resproductmodel["detailurl"] = model.graphicdetailspath+ "?standard="+ settings.GraphicDetailsPath
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\conf\__init__.py", line 57, in __getattr__
+    val = getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GraphicDetailsPath'
+
+=========================
+time:2018-03-14 13:36:32,618 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 159, in productdetail
+    resproductmodel["detailurl"] = model.graphicdetailspath+ "?standard="+ settings.GraphicDetailsPath
+  File "F:\git\myprojecttest\venv\lib\site-packages\django\conf\__init__.py", line 57, in __getattr__
+    val = getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GraphicDetailsPath'
+
+=========================
+time:2018-03-14 13:42:18,969 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 168, in productdetail
+    resproductmodel["tags"]=gettags(model.tagids)
+  File "F:/git/myprojecttest\apptest\product.py", line 206, in gettags
+    returnlist.append(row[2])
+TypeError: 'TTag' object does not support indexing
+
+=========================
+time:2018-03-14 13:44:32,649 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 168, in productdetail
+    resproductmodel["tags"]=gettags(model.tagids)
+  File "F:/git/myprojecttest\apptest\product.py", line 206, in gettags
+    returnlist.append(row[2])
+TypeError: 'TTag' object does not support indexing
+
+=========================
+time:2018-03-14 13:53:30,143 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 168, in productdetail
+    resproductmodel["tags"]=gettags(model.tagids)
+  File "F:/git/myprojecttest\apptest\product.py", line 206, in gettags
+    index= row.indexes
+AttributeError: 'TTag' object has no attribute 'indexes'
+
+=========================
+time:2018-03-14 13:56:24,127 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 169, in productdetail
+    resproductmodel["img"] =getproductimg(model.id)#获取商品图片
+  File "F:/git/myprojecttest\apptest\product.py", line 214, in getproductimg
+    img=img+getimgmainpath(path)+","
+  File "F:/git/myprojecttest\apptest\product.py", line 222, in getimgmainpath
+    substr=str[lastindex:length]
+TypeError: 'type' object is not subscriptable
+
+=========================
+time:2018-03-14 13:58:24,239 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 169, in productdetail
+    resproductmodel["img"] =getproductimg(model.id)#获取商品图片
+  File "F:/git/myprojecttest\apptest\product.py", line 214, in getproductimg
+    img=img+getimgmainpath(path)+","
+  File "F:/git/myprojecttest\apptest\product.py", line 222, in getimgmainpath
+    substr=str[lastindex:length]
+TypeError: 'type' object is not subscriptable
+
+=========================
+time:2018-03-14 14:04:21,562 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 169, in productdetail
+    resproductmodel["img"] =getproductimg(model.id)#获取商品图片
+  File "F:/git/myprojecttest\apptest\product.py", line 214, in getproductimg
+    img=img+getimgmainpath(path)+","
+  File "F:/git/myprojecttest\apptest\product.py", line 223, in getimgmainpath
+    utf8str=str[0:lastindex]+"_"+settings.ProductMainImageWidth+substr
+TypeError: 'type' object is not subscriptable
+
+=========================
+time:2018-03-14 14:05:09,528 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 169, in productdetail
+    resproductmodel["img"] =getproductimg(model.id)#获取商品图片
+  File "F:/git/myprojecttest\apptest\product.py", line 214, in getproductimg
+    img=img+getimgmainpath(path)+","
+TypeError: must be str, not bytes
+
+=========================
+time:2018-03-14 14:07:30,946 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 170, in productdetail
+    resproductmodel["attributegroup"] == getattribute(model.id)#获取属性集合
+KeyError: 'attributegroup'
+
+=========================
+time:2018-03-14 14:09:01,249 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 170, in productdetail
+    resproductmodel["attributegroup"] =getattribute(model.id)#获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 245, in getattribute
+    if row[0] not in groupnamelist:
+KeyError: 0
+
+=========================
+time:2018-03-14 14:11:27,282 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 170, in productdetail
+    resproductmodel["attributegroup"] =getattribute(model.id)#获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 245, in getattribute
+    if row.groupname not in groupnamelist:
+AttributeError: 'dict' object has no attribute 'groupname'
+
+=========================
+time:2018-03-14 14:13:03,162 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 170, in productdetail
+    resproductmodel["attributegroup"] =getattribute(model.id)#获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 245, in getattribute
+    if row.groupname not in groupnamelist:
+AttributeError: 'dict' object has no attribute 'groupname'
+
+=========================
+time:2018-03-14 16:34:37,982 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 146, in productdetail
+    nlist=getproductdiscount(pid,userid)
+  File "F:\git\myprojecttest\apptest\product.py", line 271, in getproductdiscount
+    elif row.fk_promotionsmoduleid>0:
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+=========================
+time:2018-03-14 16:35:07,269 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 146, in productdetail
+    nlist=getproductdiscount(pid,userid)
+  File "F:/git/myprojecttest\apptest\product.py", line 271, in getproductdiscount
+    elif row.fk_promotionsmoduleid>0:
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+=========================
+time:2018-03-14 16:36:34,451 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 172, in productdetail
+    resproductmodel["discountinfo"] = getproductdiscount(model.id,userid)  #获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 270, in getproductdiscount
+    elif row.fk_promotionsmoduleid>0:
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+=========================
+time:2018-03-14 16:37:33,524 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 172, in productdetail
+    resproductmodel["discountinfo"] = getproductdiscount(model.id,userid)  #获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 270, in getproductdiscount
+    elif row.fk_promotionsmoduleid>0:
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+=========================
+time:2018-03-14 16:38:10,968 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 172, in productdetail
+    resproductmodel["discountinfo"] = getproductdiscount(model.id,userid)  #获取属性集合
+  File "F:/git/myprojecttest\apptest\product.py", line 270, in getproductdiscount
+    elif row.fk_promotionsmoduleid>0:
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+

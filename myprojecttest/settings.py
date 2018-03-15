@@ -14,6 +14,10 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+GraphicDetailsPath="720"
+MyThumbImagePath="/Upfile/_myThumb"
+ProductMainImageWidth="500"
+ProductListImageWidth="200"
 
 
 # Quick-start development settings - unsuitable for production

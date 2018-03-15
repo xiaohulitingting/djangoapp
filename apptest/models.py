@@ -261,20 +261,6 @@ class TFirstpageProduct(models.Model):
         ordering = ['sort']
         db_table = 't_firstpage_product'
 
-class FirstpageProductManager(models.Manager):
-    def __init__(self,productid):
-        self.productid=productid
-    def with_counts(self):
-        from django.db import connection
-        cursor = connection.cursor()
-        var1 = self.productid
-        cursor.execute("""select a.ID,a.Name from yanwoo.t_product_type as a,yanwoo.t_product_typebrand as b,yanwoo.t_product as c where c.ID= %s and b.FK_ProductBrandID=c.FK_ProductTypeBrandID and b.FK_ProductTypeID=a.ID""",[var1])
-        tuple=cursor.fetchall()
-        result_dict = {}
-        for row in tuple:
-            result_dict={"id":row[0],"name":row[1]}
-        return result_dict
-
 
 class TGifts(models.Model):
     #id = models.IntegerField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
