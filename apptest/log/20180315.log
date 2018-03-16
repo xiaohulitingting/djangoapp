@@ -1,0 +1,24 @@
+=========================
+time:2018-03-15 12:47:48,872 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 96, in getproductlistbytypeid
+    for row in tuple:
+TypeError: 'GetProductByTypeidManager' object is not iterable
+
+=========================
+time:2018-03-15 16:16:52,724 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 268, in getsku
+    ii["AttributeValueIDs"]=ii["AttributeValueIDs"]+','+AttributeValuesitem1["AttributeValueID"]
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+

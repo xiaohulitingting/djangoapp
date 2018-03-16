@@ -1,4 +1,5 @@
 from django.db import models
+#获取首页商品
 class FirstpageProductManager(models.Manager):
     def __init__(self,productid):
         self.productid=productid
@@ -12,6 +13,7 @@ class FirstpageProductManager(models.Manager):
         for row in tuple:
             result_dict={"id":row[0],"name":row[1]}
         return result_dict
+#获取商品属性
 class ProductAttributeManager(models.Manager):
     def __init__(self,productid):
         self.productid=productid
@@ -26,3 +28,18 @@ class ProductAttributeManager(models.Manager):
             result_dict={"groupname":row[0],"attributename":row[1],"othervalue":row[2]}
             list.append(result_dict)
         return list
+#得到商品根据商品分类
+class GetProductByTypeidManager(models.Manager):
+    def __init__(self,producttypeid,startindex,endindex):
+        self.producttypeid=producttypeid
+        self.startindex=startindex
+        self.endindex=endindex
+    def queryProduct(self):
+        from django.db import connection
+        cursor = connection.cursor()
+        var1 = self.producttypeid
+        var2 = self.startindex
+        var3= self.endindex
+        cursor.execute("""select a.* from yanwoo.t_product as a,yanwoo.T_Product_TypeBrand as b where b.FK_ProductTypeID=%s and b.ID=a.FK_ProductTypeBrandID and a.status='3' order by a.salenumber desc limit %s,%s """,[var1,var2,var3])
+        tuple=cursor.fetchall()
+        return tuple

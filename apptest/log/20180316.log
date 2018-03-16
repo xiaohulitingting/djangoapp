@@ -1,0 +1,100 @@
+=========================
+time:2018-03-16 13:43:25,847 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 293, in getproducttypebyid
+    sess= request.seesion.get("test")
+AttributeError: 'WSGIRequest' object has no attribute 'seesion'
+
+=========================
+time:2018-03-16 13:46:41,084 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 293, in getproducttypebyid
+    sess= request.seesion.get("test")
+AttributeError: 'WSGIRequest' object has no attribute 'seesion'
+
+=========================
+time:2018-03-16 13:52:54,253 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 293, in getproducttypebyid
+    sess= request.seesion.get("test")
+AttributeError: 'WSGIRequest' object has no attribute 'seesion'
+
+=========================
+time:2018-03-16 13:53:36,525 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 295, in getproducttypebyid
+    sess1 = request.seesion.get("test1")
+AttributeError: 'WSGIRequest' object has no attribute 'seesion'
+
+=========================
+time:2018-03-16 15:38:41,858 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 302, in getproducttypebyid
+    pmodel=plist.query.add_filter(id=productid)
+TypeError: add_filter() got an unexpected keyword argument 'id'
+
+=========================
+time:2018-03-16 15:42:27,227 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 302, in getproducttypebyid
+    pmodel=plist.filter(id<=productid)
+UnboundLocalError: local variable 'id' referenced before assignment
+
+=========================
+time:2018-03-16 16:17:33,985 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 306, in getproducttypebyid
+    response_data["data"]=getlastproducttype(id,producttypelist)
+  File "F:/git/myprojecttest\apptest\product.py", line 319, in getlastproducttype
+    if mm.grade==1:
+AttributeError: 'QuerySet' object has no attribute 'grade'
+
+=========================
+time:2018-03-16 16:18:43,023 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\product.py", line 306, in getproducttypebyid
+    response_data["data"]=getlastproducttype(id,producttypelist)
+  File "F:/git/myprojecttest\apptest\product.py", line 319, in getlastproducttype
+    if mm.grade==1:
+AttributeError: 'dict' object has no attribute 'grade'
+

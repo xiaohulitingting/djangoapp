@@ -82,15 +82,29 @@ def getfirstproduct(list,count,typecode):
     return return_list
 ##获取分类id获取商品
 #创建者：hlt
-#创建时间：2018-03-13
+#创建时间：2018-03-15
 @csrf_exempt
 def getproductlistbytypeid(request):
     response_data={'state':0}
     try:
         if request.method=="POST":
-            typeid=request.POST.get("producttypeid")
-            pageindex=request.POST.get("pageindex",1)
-            pageindex = request.POST.get("pagesize", 10)
+            typeid=int(request.POST.get("producttypeid",0))
+            pageindex=int(request.POST.get("pageindex",1))
+            pagesize = int(request.POST.get("pagesize", 10))
+            getProductByTypeidManager= sqlexecute.GetProductByTypeidManager(typeid,pagesize*(pageindex-1),pagesize)
+            tuple=getProductByTypeidManager.queryProduct()
+            resproductlist=[]
+            for row in tuple:
+                resproductmodel={"price":row[9],"productid":row[0],"productname":row[4],"status":row[28]}
+                imglist = models.TProductImages.objects.filter(fk_productid=row[0],ismain="1").order_by("sort")
+                if imglist.count()>0:
+                    resproductmodel["imgpath"]=getimglistpath(imglist[0].path)
+                else:
+                    resproductmodel["imgpath"] = ""
+                resproductlist.append(resproductmodel)
+            response_data["message"] = "请求成功"
+            response_data["state"] = 1
+            response_data["data"] = resproductlist
         else:
             response_data["message"] = "请求方式错误"
     except:
@@ -184,6 +198,167 @@ def productdetail(request):
         c1.error()
         response_data["message"]="内部服务器错误"
     return HttpResponse(json.dumps(response_data,ensure_ascii=False))
+#获取商品sku
+#创建者：hlt
+#创建时间：2018-03-15
+@csrf_exempt
+def getsku(request):
+    response_data={"state":0}
+    try:
+        if request.method=="POST":
+           # ss=request.session.get("test3",None)
+            #request.session["test2"]='hhh'
+            productid=int(request.POST.get("productid",0))
+            getskulist=models.TProductSku.objects.filter(fk_productid=productid)
+            reslist=[]
+            skuAttributionList=[]
+            skuList=[]
+            skuvaluelist=[]
+            if getskulist.count()>0:
+                #跟商品有关的sku属性
+                code=1001
+                for item in getskulist:
+                    attributename = models.TAttribute.objects.get(id=item.fk_attributeid).attributename
+                    skuAttributionModel={"attributeid":item.fk_attributeid,"attributename":attributename}
+                    skuAttributionValueList=[]
+                    skuAttributionValue=[]
+                    klist=models.TProductSku.objects.filter(skucode=item.skucode,fk_attributeid=item.fk_attributeid)
+                    for kitem in klist:
+                        if kitem.attributevalue not in skuAttributionValue:
+                            skuAttributionValuemodel={"AttributeID":kitem.fk_attributeid,"AttributeValue":kitem.attributevalue,"AttributeValueID":code}
+                            code=code+1
+                            skuAttributionValueList.append(skuAttributionValuemodel)
+                            skuAttributionValue.append(kitem.attributevalue)
+                    skuAttributionModel["AttributeValues"]=skuAttributionValueList
+                    skuAttributionList.append(skuAttributionModel)
+                #sku
+                allsku=models.TProductSku.objects.filter(skucode=getskulist[0].skucode)
+                for skuitem in allsku:
+                    if skuitem.fk_productid not in skuvaluelist:
+                        product=models.TProduct.objects.get(id=skuitem.fk_productid)
+                        skumodel = {"id": skuitem.fk_productid, "productname": product.productname,
+                                    "price": product.currentsaleprice, }
+                        imglist = models.TProductImages.objects.filter(fk_productid=product.id, ismain=1)
+                        if (imglist.count() > 0):
+                            skumodel["img"] = getimglistpath(imglist[0].path)
+                        else:
+                            skumodel["img"] = ""
+                        skuAttributionValueList=[]
+                        for skuAttributionitem in skuAttributionList:
+                            if skuAttributionitem["attributeid"] == skuitem.fk_attributeid:
+                                AttributeValuesList = skuAttributionitem["AttributeValues"]
+                                for AttributeValuesitem in AttributeValuesList:
+                                    if AttributeValuesitem["AttributeValue"] == skuitem.attributevalue:
+                                        SKUAttributionValueModel={"AttributeID":skuitem.fk_attributeid,"AttributeValue":skuitem.attributevalue,"AttributeValueID":AttributeValuesitem["AttributeValueID"]}
+                                        skuAttributionValueList.append(SKUAttributionValueModel)
+                                        skumodel["AttributeValueIDs"]=AttributeValuesitem["AttributeValueID"]
+                                        break
+                        skumodel["Attributes"]=skuAttributionValueList
+                        skuList.append(skumodel)
+                        skuvaluelist.append(skuitem.fk_productid)
+                    else:
+                        for skuAttributionitem1 in skuAttributionList:
+                            if skuAttributionitem1["attributeid"] == skuitem.fk_attributeid:
+                                AttributeValuesList1 = skuAttributionitem1["AttributeValues"]
+                                for AttributeValuesitem1 in AttributeValuesList1:
+                                    if AttributeValuesitem1["AttributeValue"] == skuitem.attributevalue:
+                                        SKUAttributionValueModel1={"AttributeID":skuitem.fk_attributeid,"AttributeValue":skuitem.attributevalue,"AttributeValueID":AttributeValuesitem1["AttributeValueID"]}
+                                        for ii in skuList:
+                                            if skuitem.fk_productid==ii["id"]:
+                                                lastlist=ii["Attributes"]
+                                                lastlist.append(SKUAttributionValueModel1)
+                                                ii["AttributeValueIDs"]=str(ii["AttributeValueIDs"])+','+str(AttributeValuesitem1["AttributeValueID"])
+                                                break
+
+            reslist.append(skuAttributionList)
+            reslist.append(skuList)
+            response_data["message"] = "请求成功"
+            response_data["state"] = 1
+            response_data["data"] = reslist
+
+        else:
+            response_data["message"]="内部服务器错误"
+    except:
+        c1.error()
+        response_data["message"]="内部服务器错误"
+    return HttpResponse(json.dumps(response_data,ensure_ascii=False))
+#根据商品id获取商品一级分类
+#创建者：hlt
+#创建时间：2018-03-15
+@csrf_exempt
+def getproducttypebyid(request):
+    response_data={"state":0}
+    try:
+        if request.method=="POST":
+            #request.session["test3"] = "testvalue"
+            #request.session.set_expiry(60)
+           #  request.session.set_expiry(60)
+            #sess= request.session.get("test2",None)
+           #  request.session["test1"] = "testvalue1"
+            #sess1 = request.session.get("test1",None)
+            productid=int(request.POST.get("productid",0))
+            productlist=models.TProduct.objects.filter(id=productid).only("fk_producttypebrandid")
+            if productlist.count()>0:
+                product=productlist[0]
+                producttypebrand= models.TProductTypebrand.objects.filter(id=product.fk_producttypebrandid).only("fk_producttypeid")
+                producttypelist=models.TProductType.objects.filter().values("id","fatherid","name","grade")
+                id=producttypebrand[0].fk_producttypeid
+                response_data["data"]=getlastproducttype(id,producttypelist)
+                response_data["message"]="获取成功"
+                response_data["state"]=1
+            else:
+                response_data["message"]="商品不存在"
+        else:
+            response_data["message"]="请求方式错误"
+    except:
+        c1.error()
+        response_data["message"]="内部服务器错误"
+    return HttpResponse(json.dumps(response_data,ensure_ascii=False))
+def getlastproducttype(producttypeid,producttypelist):
+    mm=producttypelist.get(id=producttypeid)
+    if mm["grade"]==1:
+       return {"typeid": mm["id"], "typename": mm["name"]}
+    else:
+       return getlastproducttype(mm["fatherid"],producttypelist)
+#根据商品一级分类获取商品
+#创建者hlt
+#创建时间：2018-03-16
+@csrf_exempt
+def getproductbytype1(request):
+    response_data = {"state": 0}
+    try:
+        if request.method == "POST":
+            producttypeid = int(request.POST.get("producttypeid", 0))
+            typelist=models.TProductType.objects.all().values("id","fatherid","ischildren")
+            typeidlist=[]
+            typeid=   gettypeidnochildren(typelist,producttypeid,typeidlist)
+            result=models.TProductTypebrand.objects.extra(where=('fkproducttypeid in %s'),params=tuple(typeid))
+            # productlist = models.TProduct.objects.filter(id=productid).only("fk_producttypebrandid")
+            # if productlist.count() > 0:
+            #     product = productlist[0]
+            #     producttypebrand = models.TProductTypebrand.objects.filter(id=product.fk_producttypebrandid).only(
+            #         "fk_producttypeid")
+            #     producttypelist = models.TProductType.objects.filter().values("id", "fatherid", "name", "grade")
+            #     id = producttypebrand[0].fk_producttypeid
+            #     response_data["data"] = getlastproducttype(id, producttypelist)
+            response_data["message"] = "获取成功"
+            response_data["state"] = 1
+            # else:
+            #     response_data["message"] = "商品不存在"
+        else:
+            response_data["message"] = "请求方式错误"
+    except:
+        c1.error()
+        response_data["message"] = "内部服务器错误"
+    return HttpResponse(json.dumps(response_data, ensure_ascii=False))
+def gettypeidnochildren(typelist,producttypeid,typeidlist):
+    mmlist=typelist.filter(fatherid=producttypeid)
+    for item in mmlist:
+        if item["ischildren"]=="0":
+            typeidlist.append(item["id"])
+        else:
+            gettypeidnochildren(typelist, item["id"], typeidlist)
+    return typeidlist
 #获取供应商名称
 def getsuppliername(supplierid):
     return models.TSupplier.objects.get(id=supplierid).suppliername
@@ -312,6 +487,7 @@ def addbrowse(userid,productid,supplierid):
                     models.TMemberBrowse.objects.create(browernumber=1, fk_memberid=userid, fk_productid=productid,
                                                         fk_supplierid=supplierid,
                                                         lastbrowsedatetime=datetime.datetime.now(), remark="")
+
                     updateproduct(1, productid)
                     return True
                 else:
@@ -326,6 +502,7 @@ def addbrowse(userid,productid,supplierid):
             return True
     except:
         return False
+#更新商品数量
 def updateproduct(type,productid):
     productlist=models.TProduct.objects.filter(id=productid)
     if productlist.count()>0:
