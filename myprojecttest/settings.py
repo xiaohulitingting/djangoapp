@@ -14,15 +14,47 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#图片配置
 GraphicDetailsPath="720"
 MyThumbImagePath="/Upfile/_myThumb"
 ProductMainImageWidth="500"
 ProductListImageWidth="200"
 
-
+# 微信小程序唯一标识
+MyFishWxAppid = "wxa5c46eed93a3bfdb"
+MyFishWxSecret="79ca248b888365590b9299ee05225e49"
+# 微信应用ID
+MyFishJsPayAppid = "wx40e6fc86f0ef67a3"
+# 微信应用密钥
+MyFishJsPayAppSecret = "d40a257c01bf6abd5292255bb0412d20"
+#微信商户号
+MyFishJsPayMchid = "1412780902"
+#支付签名Key
+MyFishJsPaySignKey = "34983DA9DF474BFEAFDA693951E81D99"
+#微信应用ID
+MyFishAppPayAppid = "wxf3cd1cfae961fac1"
+#微信商户号
+MyFishAppPayMchid = "1360061402"
+#微信支付签名Key
+MyFishAppPaySignKey = "1imIe2BbbxDAtxOpEbiw9Ad2jjDeaqBi"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
+#------------支付宝------
+app_id = "2016081601755772"
+#商户ID，以2088开头由16位纯数字
+partner = "2088021579768470"
+#支付宝账号
+seller_id = "emca88@163.com"
+#商户的私钥
+private_key ="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBANVbVXwkgqxVpxePTu4l67XUW+OVuZN7fxzuEzvPugzUwL9Zf3WN1QDFLZJ7THTf7EjXHsML63WK45+cFVBZL5oHRYgn/RbFC00Cy3qMbw+u30GaODzMcfop+qa/UakhVK8Pr2dBBBDnhejmds0bqFO+9O0tjynjRjoQXHP8TGrzAgMBAAECgYEA1Hv6vgFKlsFTAPa7gBgKEPOmdBjoUgZbSP+d7iJqQ18bezZx5yxS50p4oXrkYT2lf8GmpE/Ztx2Upp/25id8bBOXaVIYMC1SdtIMgm8qNo1Vp2GrgYjtcijJKnfwM2Fy4YQPg5szVuPBmwW6G17pTr/Fk4Uta+NXd4Npq2kS2KkCQQDumXHuvy1orO/ZoQz67B2Bn2I+ch9o6vtkmdgTuyNSXwi9jRy6FiOOMTNCLxrEKPFaDZrLnRW4FtuR6G/d5KaPAkEA5Oqeh+Zw3C4GmmAsI5ipG34ll7O7AnzODlaTvwcg7xnpLOtyqRKXf7I6ZmkKBOyVoEHmj7zlouPc42YdzHIHXQJAOXm3K0bcPmniQS99e/hixzXIqbg9/r0UH9C7b01WHeKMrXSPpfftSrRpX5kPPo+KTCIY1tGZSMYg0E4InJAW2wJAR2KWv0BwT2kW7AszmIIhsg4bgPwuRC9RPo1nE3oQnh9RZI2juu+uSMb2iTsWQcTZQBls4cQBRFOUbWFJx5iDjQJAR0Zl7kYF9J5DwFk8bOHPlZZPuiHIFQRjr63yUzskfG5bSoGmvIpJlbAfWzwayBQTOLsuMgmNNzKJhwwvKxXI7A==";
+#字符编码格式 目前支持 gbk 或 utf-8
+input_charset = "utf-8"
+#支付宝的公钥，无需修改该值
+public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
+#接口版本号
+version = "1.0"
+#签名方式，选择项：RSA、DSA、MD5
+sign_type = "RSA"
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'wt0$#7g6x+m%!!p#)i8bjn1te+4@837$xm+cr(b64a)vx$rctu'
 
@@ -30,7 +62,6 @@ SECRET_KEY = 'wt0$#7g6x+m%!!p#)i8bjn1te+4@837$xm+cr(b64a)vx$rctu'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -43,16 +74,34 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apptest',
 ]
+#celery配置
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'China/Beijing'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#session缓存配置
+SESSION_ENGINE = 'django.contrib.sessions.backends.db' #（引擎（默认））
+SESSION_COOKIE_NAME ='sessionid' # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串（默认
+SESSION_COOKIE_PATH="/"  # Session的cookie保存的路径（默认）
+SESSION_COOKIE_DOMAIN = None                             # Session的cookie保存的域名（默认）
+SESSION_COOKIE_SECURE = False                            # 是否Https传输cookie（默认）
+SESSION_COOKIE_HTTPONLY = True                           # 是否Session的cookie只支持http传输（默认）
+SESSION_COOKIE_AGE = 1209600                             # Session的cookie失效日期（2周）（默认）
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False                  # 是否关闭浏览器使得Session过期（默认）
+SESSION_SAVE_EVERY_REQUEST = False                       # 是否每次请求都保存Session，默认修改之后才保存（默认）
 
 ROOT_URLCONF = 'myprojecttest.urls'
 

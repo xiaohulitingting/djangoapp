@@ -10,6 +10,11 @@ def post(url,values):
     request1 = request.Request(url, data)
     response = urlopen(request1)
     return response.read().decode()
+def post(url,values,headers,timeout=10):
+    data = parse.urlencode(values).encode('utf-8')  # 提交类型不能为str，需要为byte类型
+    request1 = request.Request(url, data,headers,timeout)
+    response = urlopen(request1)
+    return response.read().decode()
 #get 提交
 def get(url,values):
     data = parse.urlencode(values)

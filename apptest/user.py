@@ -108,7 +108,7 @@ def updatepassword(request):
                 user=userlist[0]
                 if user.password.rstrip()==password:
                     if newpass!="" and newpass!=None:
-                        user.password==newpass
+                        user.password=newpass
                         user.save()
                         response_data["message"] = "修改成功"
                         response_data["state"] = 1

@@ -1,0 +1,48 @@
+=========================
+time:2018-03-19 11:09:12,443 
+logger:product 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:\git\myprojecttest\apptest\product.py", line 341, in getproductbytype1
+    productmodel["price"] = item.currentsaleprice
+AttributeError: 'dict' object has no attribute 'currentsaleprice'
+
+=========================
+time:2018-03-19 14:49:53,693 
+logger:order 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\order.py", line 17, in createorder
+    mm=json_list.filter(id=2)
+AttributeError: 'str' object has no attribute 'filter'
+
+=========================
+time:2018-03-19 14:53:36,673 
+logger:order 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\order.py", line 17, in createorder
+    mm=json_list.filter(id=2)
+AttributeError: 'str' object has no attribute 'filter'
+
+=========================
+time:2018-03-19 14:55:18,366 
+logger:order 
+level:ERROR 
+file:log.py 
+fun:error 
+lineno:66 
+message:Traceback (most recent call last):
+  File "F:/git/myprojecttest\apptest\order.py", line 17, in createorder
+    mm=list.__contains__(id=2)
+TypeError: wrapper __contains__ doesn't take keyword arguments
+

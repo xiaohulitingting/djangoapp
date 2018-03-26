@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
-from apptest import views,Login,user,upload,product
+from apptest import views,Login,user,upload,product,order,testcelery
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -34,10 +34,16 @@ urlpatterns = [
     url(r'^getuserinfo$', user.getuserinfo), # 用户信息
     url(r'^getmessage$', user.getmessagecode), # 获取短信验证码
     url(r'^checkmessage$', user.checkmessagecode), # 校验短信验证码
-    url(r'^getmemcache$', user.getmemcache),
-    url(r'^getfirstpage', product.getfirstpage),
-    url(r'^searchproduct', product.searchproduct),
-    url(r'^productdetail', product.productdetail),
+    url(r'^getmemcache$', user.getmemcache),#测试memcache缓存
+    url(r'^getfirstpage', product.getfirstpage),#得到首页数据
+    url(r'^searchproduct', product.searchproduct),#搜索商品
+    url(r'^productdetail', product.productdetail),#商品详情
+    url(r'^getproductlistbytypeid', product.getproductlistbytypeid),#根据分类id获取商品列表
+    url(r'^getsku', product.getsku),  # 根据sku
+    url(r'^getproducttypebyid', product.getproducttypebyid),  # 根据sku
+    url(r'^getproductbytype1', product.getproductbytype1),  # 根据商品一级分类获取商品
+    url(r'^order', order.createorder),  # 下单
+
 
 ]
 if settings.DEBUG:
