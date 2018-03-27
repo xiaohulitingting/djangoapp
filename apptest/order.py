@@ -1,7 +1,8 @@
 # coding:utf-8
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from apptest import models ,sqlexecute,common,log as log
+from apptest.tasks import sleepseconds
 from django.db import transaction
 from django.db.models import Q
 import datetime,json,uuid
@@ -237,3 +238,16 @@ def wxapppay(outtradeno,deviceinfo,openid,productid,tradetype):
            return ""
    else:
        return "订单不存在"
+
+@csrf_exempt
+def testTask(request):
+    start=datetime.datetime.now()
+    try:
+        if request.method=="GET":
+            sleepseconds.delay("order testtask")
+            return JsonResponse({"state": 1, "message": "请求成功","start":start,"end":datetime.datetime.now()})
+        else:
+            return JsonResponse({"state":0,"message":"方式错误"})
+    except:
+        c1.error()
+        return JsonResponse({"state":0,"message":"内部服务器错误"})

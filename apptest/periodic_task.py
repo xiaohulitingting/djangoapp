@@ -1,78 +1,54 @@
 #coding:utf-8
-#celery 定时任务
-
-from celery import Celery
+#celery 定时任务处理
 from celery.schedules import crontab
-
-app = Celery()
-app.conf.broker_url = 'redis://localhost:6379/0'
-app.conf.result_backend = 'redis://localhost:6379/0'
-CELERY_TIMEZONE = 'Asia/Shanghai'
-
+from myprojecttest.celery import app
 from datetime import timedelta
-
-
 #配置文件的形式
 app.conf.beat_schedule = {
-    'add-every-5-seconds': {
-        'task': 'myprojecttest.tasks.test',
-        'schedule': 5.0,#5秒执行一次
-        #'args': {16,16}
+    'add-every-59-seconds': {
+        'task': 'apptest.tasks.add',#task： 指定任务的名字
+        'schedule': timedelta(seconds=59),#秒执行一次(schedule : 设定任务的调度方式，可以是一个表示秒的整数，也可以是一个 timedelta 对象，或者是一个 crontab 对象（后面介绍），总之就是设定任务如何重复执行)
+        'args': (16, 16)#args： 任务的参数列表kwargs：任务的参数字典options：所有 apply_async 所支持的参数
     },
-}
-app.conf.timezone = 'UTC'
-
-'''
-#函数形式
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    #add_periodic_task 会添加一条定时任务
-    sender.add_periodic_task(10.0, test('hello'), name='add every 10')
-
-    # Calls test('world') every 30 seconds
-    sender.add_periodic_task(30.0, test('world'), expires=10)
-
-    # Executes every Monday morning at 7:30 a.m.
-    sender.add_periodic_task(
-        crontab(hour=7, minute=30, day_of_week=1),
-        test('Happy Mondays!'),
-    )
-
-
-@app.task
-def test(arg):
-    print(arg)
-'''
-
-
-'''
-celery -A apptest.periodic_task beat
-celery -A apptest.periodic_task worker
-
-'''
-
-
-'''
-#配置文件的形式
-app.conf.beat_schedule = {
-    'add-every-5-seconds': {
-        'task': 'myprojecttest.tasks.add',
-        'schedule': 5.0,#30秒执行一次
-        'args': (16, 16)
+    'add-every-50-seconds': {
+        'task': 'apptest.tasks.lessnum',  # task： 指定任务的名字
+        'schedule': timedelta(seconds=50),
+        #
+        # 秒执行一次(schedule : 设定任务的调度方式，可以是一个表示秒的整数，也可以是一个 timedelta 对象，或者是一个 crontab 对象（后面介绍），总之就是设定任务如何重复执行)
+        'args': (20, 16)  # args： 任务的参数列表kwargs：任务的参数字典options：所有 apply_async 所支持的参数
     },
-}
-app.conf.timezone = 'UTC'
-from celery.schedules import crontab
-
-app.conf.beat_schedule = {
-    # Executes every Monday morning at 7:30 a.m.
-    'add-every-monday-morning': {
-        'task': 'tasks.add',
-        'schedule': crontab(hour=7, minute=30, day_of_week=1),
+   'add-every-monday-morning': {
+        'task': 'apptest.tasks.mul',
+        'schedule': crontab(hour=7, minute=30, day_of_week=1),#每周1的早上7.30执行tasks.add任务
         'args': (16, 16),
     },
-}#每周1的早上7.30执行tasks.add任务
+}
+
 
 '''
+# 每分钟执行一次
+c1 = crontab()
+
+# 每天凌晨十二点执行
+c2 = crontab(minute=0, hour=0)
+
+# 每十五分钟执行一次
+crontab(minute='*/15')
+
+# 每周日的每一分钟执行一次
+crontab(minute='*',hour='*', day_of_week='sun')
+
+# 每周三，五的三点，七点和二十二点没十分钟执行一次
+crontab(minute='*/10',hour='3,17,22', day_of_week='thu,fri')
+'''
+
+'''
+#定时任务（如果程序含有定时任务 +异步处理任务）
+celery -A apptest.periodic_task beat -l info
+celery -A apptest.periodic_task worker -l info -P eventlet
+celery -A myprojecttest flower --port=5555
+#异步处理任务（如果没有定时任务）
+celery -A myprojecttest worker -l info -P eventlet
+'''
+
 

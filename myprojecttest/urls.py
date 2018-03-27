@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
-from apptest import views,Login,user,upload,product,order,testcelery
+from apptest import views,Login,user,upload,product,order,executetasks
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -43,6 +43,9 @@ urlpatterns = [
     url(r'^getproducttypebyid', product.getproducttypebyid),  # 根据sku
     url(r'^getproductbytype1', product.getproductbytype1),  # 根据商品一级分类获取商品
     url(r'^order', order.createorder),  # 下单
+    url(r'^task', order.testTask),  # 执行任务
+    url(r'^addtask', executetasks.get_add),  # 执行任务
+    url(r'^gettaskresult', executetasks.get_status),  # 执行任务
 
 
 ]

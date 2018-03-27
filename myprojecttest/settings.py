@@ -59,9 +59,10 @@ sign_type = "RSA"
 SECRET_KEY = 'wt0$#7g6x+m%!!p#)i8bjn1te+4@837$xm+cr(b64a)vx$rctu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -73,14 +74,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apptest',
+
 ]
 #celery配置
-BROKER_URL = 'redis://localhost:6379'
+BROKER_URL = 'redis://localhost:6379'#redis：//127.0.0.1:6379/0这个说明使用的redis的0号队列，如果有多个celery任务都使用同一个队列，则会造成任务混乱。最好是celery实例单独使用一个队列。
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'China/Beijing'
+CELERY_TIMEZONE = 'Asia/Shanghai'
 
 
 MIDDLEWARE = [
